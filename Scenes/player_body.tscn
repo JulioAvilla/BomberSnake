@@ -1,0 +1,121 @@
+[gd_scene load_steps=11 format=3 uid="uid://bju6gf3hu135y"]
+
+[ext_resource type="Script" path="res://Scripts/player_body.gd" id="1_4o0ku"]
+[ext_resource type="Texture2D" uid="uid://ctdh022m18ajr" path="res://Sprites/playersheet2.png" id="2_1cstw"]
+
+[sub_resource type="Animation" id="Animation_gash1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_o676n"]
+resource_name = "death"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.8, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_1xj8n"]
+resource_name = "walk_down"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 2]
+}
+
+[sub_resource type="Animation" id="Animation_1ww4o"]
+resource_name = "walk_left"
+
+[sub_resource type="Animation" id="Animation_yj062"]
+resource_name = "walk_right"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 3, 5]
+}
+
+[sub_resource type="Animation" id="Animation_pa1x7"]
+resource_name = "walk_up"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 6, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v0xxe"]
+_data = {
+"RESET": SubResource("Animation_gash1"),
+"death": SubResource("Animation_o676n"),
+"walk_down": SubResource("Animation_1xj8n"),
+"walk_left": SubResource("Animation_1ww4o"),
+"walk_right": SubResource("Animation_yj062"),
+"walk_up": SubResource("Animation_pa1x7")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45fgt"]
+size = Vector2(14, 16)
+
+[node name="PlayerBody" type="Node2D"]
+script = ExtResource("1_4o0ku")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1cstw")
+hframes = 9
+vframes = 3
+frame = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v0xxe")
+}
+autoplay = "walk_right"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_45fgt")

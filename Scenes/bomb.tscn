@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://djmn4bhfudslo"]
+
+[ext_resource type="Script" path="res://Scripts/bomb.gd" id="1_cgc2g"]
+[ext_resource type="Texture2D" uid="uid://0skrm5kxng3r" path="res://Sprites/Bomberman - Bomb - Only - Range.png" id="2_rreup"]
+
+[sub_resource type="Animation" id="Animation_ut0fh"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_1totf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_q3vfm"]
+resource_name = "explosion"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jcaga"]
+_data = {
+"Idle": SubResource("Animation_ut0fh"),
+"RESET": SubResource("Animation_1totf"),
+"explosion": SubResource("Animation_q3vfm")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqhga"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cpii1"]
+size = Vector2(44, 44)
+
+[node name="Bomb" type="Node2D"]
+script = ExtResource("1_cgc2g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_rreup")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_jcaga")
+}
+
+[node name="Center" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Center"]
+shape = SubResource("RectangleShape2D_lqhga")
+
+[node name="Corner" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Corner"]
+top_level = true
+shape = SubResource("RectangleShape2D_cpii1")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="Center" to="." method="_on_center_area_entered"]
+[connection signal="area_entered" from="Corner" to="." method="_on_corner_area_entered"]

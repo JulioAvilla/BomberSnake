@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgfc8lhy5iex2"]
+
+[ext_resource type="Script" path="res://Scripts/apple.gd" id="1_x36hm"]
+[ext_resource type="Texture2D" uid="uid://bvnmd1hal24k" path="res://Sprites/PowerUps - Only.png" id="2_4qxnc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gt5hr"]
+size = Vector2(14, 14)
+
+[node name="Apple" type="Area2D"]
+collision_mask = 9
+script = ExtResource("1_x36hm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4qxnc")
+hframes = 4
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gt5hr")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
