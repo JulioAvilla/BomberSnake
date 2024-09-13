@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://djj63bbj73lq"]
+
+[ext_resource type="Texture2D" uid="uid://ctdh022m18ajr" path="res://Sprites/playersheet2.png" id="1_c0kwc"]
+[ext_resource type="Script" path="res://Scripts/interface.gd" id="1_p3kgx"]
+[ext_resource type="Texture2D" uid="uid://nqf38o1m0sw2" path="res://Sprites/playersheet1.png" id="2_mjet3"]
+
+[node name="Interface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p3kgx")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 97.0
+offset_top = 56.0
+offset_right = 265.0
+offset_bottom = 79.0
+text = "Bomber Snake Game"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(145, 120)
+scale = Vector2(4, 4)
+texture = ExtResource("1_c0kwc")
+hframes = 9
+vframes = 3
+frame = 3
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(209, 120)
+scale = Vector2(4, 4)
+texture = ExtResource("2_mjet3")
+flip_h = true
+hframes = 9
+vframes = 3
+frame = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 160.0
+offset_right = 241.0
+offset_bottom = 273.0
+alignment = 1
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="Config" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Configurations"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Config" to="." method="_on_config_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

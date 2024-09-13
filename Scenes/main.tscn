@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dht0sxofa1pn7"]
+
+[ext_resource type="PackedScene" uid="uid://beoc3tn4h3mrs" path="res://Scenes/game.tscn" id="1_624ty"]
+[ext_resource type="PackedScene" uid="uid://djj63bbj73lq" path="res://Scenes/interface.tscn" id="2_mfelp"]
+
+[node name="Main" type="Node"]
+
+[node name="Game" parent="." instance=ExtResource("1_624ty")]
+
+[node name="Interface" parent="." instance=ExtResource("2_mfelp")]
+offset_left = -30.0
+offset_top = -32.0
+offset_right = 35.0
+offset_bottom = -32.0

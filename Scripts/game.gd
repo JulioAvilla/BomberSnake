@@ -2,15 +2,25 @@ extends Node2D
 
 @onready var tile_map = $TileMap
 @onready var score_label = $TimerSprite/Label
+@onready var spawner = $Spawner
 
 signal grow_head
 signal grow_reverse
 var rng = RandomNumberGenerator.new()
 var score = 0
-var best_score = 0
-
+var bomb_active: bool
 
 func _ready():
+	#start_game()
+	return
+
+func start_game():
+	
+	score = 0
+	
+	for child in spawner.get_children():
+		child.queue_free()
+	
 	var player_head = preload("res://Scenes/player.tscn").instantiate()
 	player_head.tile_map = tile_map
 	player_head.world = self
@@ -39,16 +49,16 @@ func apple_eaten():
 	var x = rng.randi_range(1,17)
 	var y = rng.randi_range(1,17)
 	
-	create_bomb(Vector2i(x, y))
-	x -= 1
-	y -= 1
-	create_bomb(Vector2i(17 - x, 17 - y))
-	
-	x = rng.randi_range(1,17)
-	y = rng.randi_range(1,17)
+	if bomb_active:
+		create_bomb(Vector2i(x, y))
+		x -= 1
+		y -= 1
+		create_bomb(Vector2i(17 - x, 17 - y))
+		
+		x = rng.randi_range(1,17)
+		y = rng.randi_range(1,17)
 	
 	score += 1
-	
 	create_apple(Vector2i(x, y))
 	
 	print("Score: ", score)
@@ -59,7 +69,7 @@ func create_apple(spawn: Vector2i):
 	apple.connect("eat", apple_eaten)
 	call_deferred("_add_new_apple", apple)
 func _add_new_apple(apple):
-	add_child(apple)
+	spawner.add_child(apple)
 
 func create_bomb(spawn):
 	var bomb = preload("res://Scenes/bomb.tscn").instantiate()
@@ -68,7 +78,7 @@ func create_bomb(spawn):
 	bomb.world = self
 	call_deferred("_add_new_bomb", bomb)
 func _add_new_bomb(bomb):
-	add_child(bomb)
+	spawner.add_child(bomb)
 
 
 func _process(_delta):

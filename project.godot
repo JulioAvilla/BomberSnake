@@ -11,16 +11,20 @@ config_version=5
 [application]
 
 config/name="Ultimate_Snake_Game"
-run/main_scene="res://Scenes/game.tscn"
+run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://Scripts/game_manager.gd"
+
 [display]
 
-window/size/viewport_width=352
-window/size/viewport_height=304
-window/size/window_width_override=1021
-window/size/window_height_override=882
+window/size/viewport_width=304
+window/size/viewport_height=320
+window/size/window_width_override=912
+window/size/window_height_override=960
 window/stretch/mode="canvas_items"
 
 [input]

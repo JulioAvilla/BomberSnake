@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var sprite = $Sprite2D
 @onready var animation = $AnimationPlayer
-@onready var collision = $Area2D/CollisionShape2D
 
 
 @export var tile_map = 0

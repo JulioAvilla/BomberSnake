@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var timer = $Timer
+
 @export var world = 0
 @export var tile_map = 0
 
@@ -12,10 +14,7 @@ func _on_center_area_entered(_area):
 
 func _on_corner_area_entered(_area):
 	animation.play("explosion")
-
-
-func _on_animation_player_animation_finished(_anim_name):
-	explode()
+	timer.start()
 
 
 func explode():
@@ -40,3 +39,7 @@ func create_boom(x, y):
 	call_deferred("_add_booms", boom)
 func _add_booms(b):
 	world.add_child(b)
+
+
+func _on_timer_timeout():
+	explode()

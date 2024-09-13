@@ -3,7 +3,7 @@ extends Node2D
 @onready var sprite = $Sprite2D
 @onready var animation = $AnimationPlayer
 @onready var collision = $Area2D/CollisionShape2D
-
+@onready var timer = $Timer
 
 @export var tile_map = 0
 @export var skin = "res://Sprites/playersheet2.png"
@@ -68,9 +68,8 @@ func _process(_delta):
 	
 	if Input.is_action_just_pressed("active"):
 		active = !active
+		timer.start()
 	
-	if not active:
-		return
 	
 	if not reverse:
 		if Input.is_action_pressed("right") and side != 4:
@@ -90,22 +89,6 @@ func _process(_delta):
 			side = 2
 		elif Input.is_action_pressed("left") and side != 4:
 			side = 1
-	
-	if is_moving:
-		return
-	
-	if side == 1:
-		sprite.flip_h = false
-		move(Vector2.RIGHT)
-	elif side == 2:
-		sprite.flip_h = false
-		move(Vector2.UP)
-	elif side == 3:
-		sprite.flip_h = false
-		move(Vector2.DOWN)
-	elif side == 4:
-		sprite.flip_h = true
-		move(Vector2.LEFT)
 
 
 func move(direction: Vector2):
@@ -139,3 +122,27 @@ func _on_area_2d_area_entered(area):
 		die()
 	if area.get_collision_layer() == 3:
 		return
+
+
+func _on_timer_timeout():
+	if not active:
+		return
+	
+	if side == 1:
+		sprite.flip_h = false
+		move(Vector2.RIGHT)
+	elif side == 2:
+		sprite.flip_h = false
+		move(Vector2.UP)
+	elif side == 3:
+		sprite.flip_h = false
+		move(Vector2.DOWN)
+	elif side == 4:
+		sprite.flip_h = true
+		move(Vector2.LEFT)
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "death":
+		queue_free()
+		GameManager.lobby.show()
