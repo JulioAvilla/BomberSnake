@@ -14,7 +14,7 @@ func _on_center_area_entered(_area):
 
 func _on_corner_area_entered(_area):
 	animation.play("explosion")
-	timer.start()
+	timer.start(GameManager.bomb_time)
 
 
 func explode():

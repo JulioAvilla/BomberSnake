@@ -92,7 +92,6 @@ top_level = true
 shape = SubResource("RectangleShape2D_cpii1")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.45
 
 [connection signal="area_entered" from="Center" to="." method="_on_center_area_entered"]
 [connection signal="area_entered" from="Corner" to="." method="_on_corner_area_entered"]

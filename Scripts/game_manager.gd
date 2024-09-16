@@ -4,10 +4,6 @@ var lobby: Control
 
 var best_score: int
 
-func _ready():
-	pass # Replace with function body.
+var movement_speed = 0.15
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+var bomb_time = movement_speed * 4

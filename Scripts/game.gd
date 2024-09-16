@@ -1,7 +1,8 @@
 extends Node2D
 
 @onready var tile_map = $TileMap
-@onready var score_label = $TimerSprite/Label
+@onready var score_label = $TimerSprite/ScoreLabel
+@onready var best_score_label = $TimerSprite/BestScoreLabel
 @onready var spawner = $Spawner
 
 signal grow_head
@@ -82,4 +83,8 @@ func _add_new_bomb(bomb):
 
 
 func _process(_delta):
+	if GameManager.best_score < score:
+		GameManager.best_score = score
+	
+	best_score_label.text = str(GameManager.best_score)
 	score_label.text = str(score)

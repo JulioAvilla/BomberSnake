@@ -58,16 +58,25 @@ func _add_player_body(player_body):
 
 func move_body(target_tile, p_side):
 	
-	side = p_side
+	#side = p_side
+	
+	var current_tile: Vector2i = tile_map.local_to_map(global_position)
+	
+	emit_signal("moved", current_tile, side)
+	
+	if target_tile - current_tile == Vector2i(1,0):
+		side = 1
+	elif target_tile - current_tile == Vector2i(0,-1):
+		side = 2
+	elif target_tile - current_tile == Vector2i(0,1):
+		side = 3
+	elif target_tile - current_tile == Vector2i(-1,0):
+		side = 4
 	
 	if side == 4:
 		sprite.flip_h = true
 	else:
 		sprite.flip_h = false
-	
-	var current_tile: Vector2i = tile_map.local_to_map(global_position)
-	
-	emit_signal("moved", current_tile, side)
 	
 	is_moving = true
 	global_position = tile_map.map_to_local(target_tile)
@@ -95,3 +104,8 @@ func die():
 	active = false
 	animation.play("death")
 	emit_signal("die_army")
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "death":
+		queue_free()

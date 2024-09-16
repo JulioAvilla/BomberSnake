@@ -31,7 +31,13 @@ layer_0/tile_data = PackedInt32Array(0, 65536, 0, 65537, 196608, 0, 131073, 0, 0
 position = Vector2(152, -16)
 texture = ExtResource("3_ips8v")
 
-[node name="Label" type="Label" parent="TimerSprite"]
+[node name="Score" type="Sprite2D" parent="TimerSprite"]
+position = Vector2(-136, 0)
+texture = ExtResource("4_ggxbx")
+hframes = 4
+frame = 2
+
+[node name="ScoreLabel" type="Label" parent="TimerSprite"]
 offset_left = -120.0
 offset_top = -16.0
 offset_right = -110.0
@@ -40,11 +46,19 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="TimerSprite"]
-position = Vector2(-136, 0)
+[node name="BestScore" type="Sprite2D" parent="TimerSprite"]
+position = Vector2(-80, 0)
 texture = ExtResource("4_ggxbx")
 hframes = 4
-frame = 2
+
+[node name="BestScoreLabel" type="Label" parent="TimerSprite"]
+offset_left = -64.0
+offset_top = -16.0
+offset_right = -54.0
+offset_bottom = 15.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Spawner" type="Node" parent="."]
 

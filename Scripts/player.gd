@@ -68,7 +68,7 @@ func _process(_delta):
 	
 	if Input.is_action_just_pressed("active"):
 		active = !active
-		timer.start()
+		timer.start(GameManager.movement_speed)
 	
 	
 	if not reverse:
