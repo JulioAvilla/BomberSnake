@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://beoc3tn4h3mrs"]
+[gd_scene load_steps=9 format=3 uid="uid://beoc3tn4h3mrs"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_7x1w8"]
 [ext_resource type="Texture2D" uid="uid://b684yv0rckqgx" path="res://Sprites/StageBlocks - New.png" id="2_xcqqg"]
@@ -18,6 +18,16 @@ texture = ExtResource("2_xcqqg")
 custom_data_layer_0/name = "walkable"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_hhr2b")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s85tw"]
+texture = ExtResource("2_xcqqg")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6ggvp"]
+sources/0 = SubResource("TileSetAtlasSource_s85tw")
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_7x1w8")
@@ -61,6 +71,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Spawner" type="Node" parent="."]
+
+[node name="TileMap2" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_6ggvp")
+format = 2
+layer_0/tile_data = PackedInt32Array(1179648, 65536, 0, 1179649, 65536, 0, 1179650, 65536, 0, 1179651, 65536, 0, 1179652, 65536, 0, 1179653, 65536, 0, 1179654, 65536, 0, 1179655, 65536, 0, 1179656, 65536, 0, 1179657, 65536, 0, 1179658, 65536, 0, 1179659, 65536, 0, 1179660, 65536, 0, 1179661, 65536, 0, 1179662, 65536, 0, 1179663, 65536, 0, 1179664, 65536, 0, 1179665, 65536, 0, 1179666, 65536, 0, 1114130, 65536, 0, 1048594, 65536, 0, 983058, 65536, 0, 917522, 65536, 0, 851986, 65536, 0, 786450, 65536, 0, 720914, 65536, 0, 655378, 65536, 0, 589842, 65536, 0, 524306, 65536, 0, 458770, 65536, 0, 393234, 65536, 0, 327698, 65536, 0, 262162, 65536, 0, 196626, 65536, 0, 131090, 65536, 0, 65554, 65536, 0, 18, 65536, 0, 0, 65536, 0, 1, 65536, 0, 2, 65536, 0, 3, 65536, 0, 4, 65536, 0, 5, 65536, 0, 6, 65536, 0, 7, 65536, 0, 8, 65536, 0, 9, 65536, 0, 10, 65536, 0, 11, 65536, 0, 12, 65536, 0, 13, 65536, 0, 14, 65536, 0, 15, 65536, 0, 16, 65536, 0, 17, 65536, 0, 65536, 65536, 0, 131072, 65536, 0, 196608, 65536, 0, 262144, 65536, 0, 327680, 65536, 0, 393216, 65536, 0, 458752, 65536, 0, 524288, 65536, 0, 589824, 65536, 0, 655360, 65536, 0, 720896, 65536, 0, 786432, 65536, 0, 851968, 65536, 0, 917504, 65536, 0, 983040, 65536, 0, 1048576, 65536, 0, 1114112, 65536, 0, 1245200, 65536, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(152, 136)

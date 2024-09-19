@@ -64,10 +64,12 @@ func _physics_process(_delta):
 	if global_position == sprite.global_position:
 		is_moving = false
 
+var start = false
 func _process(_delta):
 	
-	if Input.is_action_just_pressed("active"):
+	if (Input.is_action_pressed("right") or Input.is_action_pressed("up") or Input.is_action_pressed("down")) and not start:
 		active = !active
+		start = true
 		timer.start(GameManager.movement_speed)
 	
 	
@@ -146,3 +148,4 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "death":
 		queue_free()
 		GameManager.lobby.show()
+		GameManager.game_started = false

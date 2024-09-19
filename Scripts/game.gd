@@ -9,7 +9,6 @@ signal grow_head
 signal grow_reverse
 var rng = RandomNumberGenerator.new()
 var score = 0
-var bomb_active: bool
 
 func _ready():
 	#start_game()
@@ -50,7 +49,7 @@ func apple_eaten():
 	var x = rng.randi_range(1,17)
 	var y = rng.randi_range(1,17)
 	
-	if bomb_active:
+	if GameManager.bomb_active:
 		create_bomb(Vector2i(x, y))
 		x -= 1
 		y -= 1

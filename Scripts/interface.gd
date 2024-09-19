@@ -14,3 +14,8 @@ func _on_config_pressed():
 
 func _on_quit_pressed():
 	get_tree().quit()
+
+func _process(_delta):
+	if Input.is_action_pressed("start") and not GameManager.game_started:
+		_on_start_pressed()
+		GameManager.game_started = true
